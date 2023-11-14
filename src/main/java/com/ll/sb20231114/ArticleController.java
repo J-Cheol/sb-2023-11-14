@@ -29,10 +29,13 @@ public class ArticleController
     {
         Article article= new Article(articles.size() + 1,title, body);
 
-        RsData rs = new RsData("S-1", "1번 게시물이 작성되었습니다.".formatted(article.getId())
-        , article);
+        RsData<Article> rs = new RsData<Article>(
+                "S-1",
+                "%d번 게시물이 작성되었습니다.".formatted(article.getId()),
+                article);
 
         articles.add(article);
+
         return rs;
     }
 
