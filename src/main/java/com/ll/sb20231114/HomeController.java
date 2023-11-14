@@ -1,16 +1,23 @@
 package com.ll.sb20231114;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 // 컨트롤러 입니다. 어노테이션 - 주석 아래 클래스가 컨트롤러다라는 것을 알려줌
 public class HomeController
 {
     @GetMapping("/")
-    @ResponseBody // 이 함수의 리턴값을 그대로 브라우저에 전송하라는 의미
+    @ResponseBody
+        // 이 함수의 리턴값을 그대로 브라우저에 전송하라는 의미
     String showMain()
     {
         return "안녕하세요.";
@@ -27,7 +34,7 @@ public class HomeController
     @ResponseBody
     String showCalc(int a, int b)
     {
-        return "계산 결과 %d". formatted(a+b);
+        return "계산 결과 %d".formatted(a + b);
     }
 
 
@@ -42,25 +49,25 @@ public class HomeController
     @ResponseBody
     String showCalc3(Integer a, Integer b)
     {
-        return "계산 결과 %d".formatted(a*b);
+        return "계산 결과 %d".formatted(a * b);
     }
 
     @GetMapping("calc4")
     @ResponseBody
     String showCalc4(double a, double b)
     {
-        return "계산 결과 %f".formatted(a*b);
+        return "계산 결과 %f".formatted(a * b);
     }
 
     @GetMapping("calc5")
     @ResponseBody
     String showCalc5
             (
-            @RequestParam(defaultValue = "0") int a,
-            @RequestParam(defaultValue = "0") int b
+                    @RequestParam(defaultValue = "0") int a,
+                    @RequestParam(defaultValue = "0") int b
             )
     {
-        return "계산 결과 %d".formatted(a*b);
+        return "계산 결과 %d".formatted(a * b);
     }
 
     @GetMapping("calc6")
@@ -83,6 +90,117 @@ public class HomeController
             )
     {
         return "계산 결과 %s".formatted(a + b);
+    }
+
+    @GetMapping("calc8")
+    @ResponseBody
+    int showCalc8
+            (
+                    @RequestParam(defaultValue = "0") int a,
+                    @RequestParam(defaultValue = "0") int b
+            )
+    {
+        return a + b;
+    }
+
+    @GetMapping("calc9")
+    @ResponseBody
+    boolean showCalc9
+            (
+                    @RequestParam(defaultValue = "0") int a,
+                    @RequestParam(defaultValue = "0") int b
+            )
+    {
+        return a > b;
+    }
+
+    @GetMapping("calc10")
+    @ResponseBody
+    Person showCalc10
+            (
+                    String name, int age
+            )
+    {
+        return new Person(name, age);
+    }
+
+    @GetMapping("calc11")
+    @ResponseBody
+    Person2 showCalc11
+            (
+                    String name, int age
+            )
+    {
+        return new Person2(name, age);
+    }
+
+    @GetMapping("/calc12")
+    @ResponseBody
+    List<Integer> showCalc12() {
+        List<Integer> nums = new ArrayList<>() {{
+            add(10);
+            add(-510);
+            add(10010);
+        }};
+
+        return nums;
+    }
+    @GetMapping("calc13")
+    @ResponseBody
+    int[] showCalc13()
+    {
+        int[] nums = new int[]{10, -510, 10010};
+        return nums;
+    }
+
+
+    @GetMapping("calc14")
+    @ResponseBody
+    Map<String, Object> showCalc14
+            (
+                    String name, int age
+            )
+    {
+        Map<String, Object> personMap = Map.of(
+                "name", name,
+                "age", age
+        );
+
+        return personMap;
+    }
+
+    @GetMapping("calc15")
+    @ResponseBody
+    List<Person2> showCalc15
+            (
+                    String name, int age
+            )
+    {
+        List<Person2> persons = new ArrayList<>(){{
+            add(new Person2(name, age));
+            add(new Person2(name + "!", + age + 1));
+            add(new Person2(name + "!!", + age + 2));
+        }};
+
+        return persons;
+    }
+
+
+    @AllArgsConstructor
+    class Person
+    {
+        public String name;
+        public int age;
+    }
+
+    @AllArgsConstructor
+
+    class Person2
+    {
+        @Getter
+        private String name;
+        @Getter
+        private int age;
     }
 }
 
