@@ -3,6 +3,7 @@ package com.ll.sb20231114;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,21 +46,21 @@ public class HomeController
         return "a : " + a + ", b : " + b;
     }
 
-    @GetMapping("calc3")
+    @GetMapping("/calc3")
     @ResponseBody
     String showCalc3(Integer a, Integer b)
     {
         return "계산 결과 %d".formatted(a * b);
     }
 
-    @GetMapping("calc4")
+    @GetMapping("/calc4")
     @ResponseBody
     String showCalc4(double a, double b)
     {
         return "계산 결과 %f".formatted(a * b);
     }
 
-    @GetMapping("calc5")
+    @GetMapping("/calc5")
     @ResponseBody
     String showCalc5
             (
@@ -70,7 +71,7 @@ public class HomeController
         return "계산 결과 %d".formatted(a * b);
     }
 
-    @GetMapping("calc6")
+    @GetMapping("/calc6")
     @ResponseBody
     String showCalc6
             (
@@ -81,7 +82,7 @@ public class HomeController
         return "계산 결과 %f".formatted(a + b);
     }
 
-    @GetMapping("calc7")
+    @GetMapping("/calc7")
     @ResponseBody
     String showCalc7
             (
@@ -92,7 +93,7 @@ public class HomeController
         return "계산 결과 %s".formatted(a + b);
     }
 
-    @GetMapping("calc8")
+    @GetMapping("/calc8")
     @ResponseBody
     int showCalc8
             (
@@ -103,7 +104,7 @@ public class HomeController
         return a + b;
     }
 
-    @GetMapping("calc9")
+    @GetMapping("/calc9")
     @ResponseBody
     boolean showCalc9
             (
@@ -114,7 +115,7 @@ public class HomeController
         return a > b;
     }
 
-    @GetMapping("calc10")
+    @GetMapping("/calc10")
     @ResponseBody
     Person showCalc10
             (
@@ -124,7 +125,7 @@ public class HomeController
         return new Person(name, age);
     }
 
-    @GetMapping("calc11")
+    @GetMapping("/calc11")
     @ResponseBody
     Person2 showCalc11
             (
@@ -136,8 +137,10 @@ public class HomeController
 
     @GetMapping("/calc12")
     @ResponseBody
-    List<Integer> showCalc12() {
-        List<Integer> nums = new ArrayList<>() {{
+    List<Integer> showCalc12()
+    {
+        List<Integer> nums = new ArrayList<>()
+        {{
             add(10);
             add(-510);
             add(10010);
@@ -145,7 +148,8 @@ public class HomeController
 
         return nums;
     }
-    @GetMapping("calc13")
+
+    @GetMapping("/calc13")
     @ResponseBody
     int[] showCalc13()
     {
@@ -154,7 +158,7 @@ public class HomeController
     }
 
 
-    @GetMapping("calc14")
+    @GetMapping("/calc14")
     @ResponseBody
     Map<String, Object> showCalc14
             (
@@ -169,20 +173,108 @@ public class HomeController
         return personMap;
     }
 
-    @GetMapping("calc15")
+    @GetMapping("/calc15")
     @ResponseBody
     List<Person2> showCalc15
             (
                     String name, int age
             )
     {
-        List<Person2> persons = new ArrayList<>(){{
-            add(new Person2(name, age));
-            add(new Person2(name + "!", + age + 1));
-            add(new Person2(name + "!!", + age + 2));
+        List<Person2> persons = new ArrayList<>()
+        {{ // 생성자 익명클래스라 생성자도 이름이 없다.
+            this.add(new Person2(name, age));
+            this.add(new Person2(name + "!", +age + 1));
+            this.add(new Person2(name + "!!", +age + 2));
         }};
 
         return persons;
+    }
+
+    @GetMapping("/calc16")
+    @ResponseBody
+    String showCalc16()
+    {
+        String html = "";
+
+        html += "<div>";
+        html += "<input type=\"text\" placeholder=\"내용\">";
+        html += "</div>";
+        return html;
+    }
+
+    @GetMapping("/calc17")
+    @ResponseBody
+    String showCalc17()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<div>");
+        sb.append("<input type=\"text\" placeholder=\"내용\">");
+        sb.append("</div>");
+        return sb.toString();
+    }
+
+    @GetMapping("c/alc18")
+    @ResponseBody
+    String showCalc18()
+    {
+        String html = "<div><input type=\"text\" placeholder=\"내용\"></div>";
+
+        return html;
+    }
+
+    @GetMapping("/calc19")
+    @ResponseBody
+    String showCalc19()
+    {
+        String html = """
+                <div>
+                    <input type=\"text\" placeholder=\"내용\">
+                </div>"
+                """;
+
+        return html;
+    }
+
+    @GetMapping("/calc20")
+    @ResponseBody
+    String showCalc20()
+    {
+        String html = """
+                <div>
+                    <input type="text" placeholder="내용" value="반가워요.">
+                </div>
+                """;
+
+        return html;
+    }
+
+    @GetMapping("/calc21")
+    @ResponseBody
+    String showCalc21(
+            @RequestParam(defaultValue = "") String subject,
+            @RequestParam(defaultValue = "") String content)
+    {
+        String html = """
+                <div>
+                    <input type="text" placeholder="제목" value="%s">
+                </div>
+                <div>
+                    <input type="text" placeholder="내용" value="%s">
+                </div>
+                """.formatted(subject, content);
+
+        return html;
+    }
+
+    @GetMapping("/calc22")
+    String showCalc22(){
+        return "calc22";
+    }
+
+    @GetMapping("/calc23")
+    String showCalc23(Model model){
+        return "calc23";
     }
 
 
@@ -194,7 +286,6 @@ public class HomeController
     }
 
     @AllArgsConstructor
-
     class Person2
     {
         @Getter
