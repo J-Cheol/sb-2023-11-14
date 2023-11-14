@@ -274,6 +274,8 @@ public class HomeController
 
     @GetMapping("/calc23")
     String showCalc23(Model model){
+        model.addAttribute("v1", "안녕");
+        model.addAttribute("v2","반가워");
         return "calc23";
     }
 
