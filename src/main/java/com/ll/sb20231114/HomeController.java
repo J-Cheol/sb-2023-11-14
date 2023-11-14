@@ -157,7 +157,6 @@ public class HomeController
         return nums;
     }
 
-
     @GetMapping("/calc14")
     @ResponseBody
     Map<String, Object> showCalc14
@@ -268,17 +267,26 @@ public class HomeController
     }
 
     @GetMapping("/calc22")
-    String showCalc22(){
+    String showCalc22()
+    {
         return "calc22";
     }
 
     @GetMapping("/calc23")
-    String showCalc23(Model model){
+    String showCalc23(Model model)
+    {
         model.addAttribute("v1", "안녕");
-        model.addAttribute("v2","반가워");
+        model.addAttribute("v2", "반가워");
         return "calc23";
     }
-
+    int num = 0;
+    @GetMapping("/calc24")
+    @ResponseBody
+    int showCalc24()
+    {
+        num++;
+        return num;
+    }
 
     @AllArgsConstructor
     class Person
