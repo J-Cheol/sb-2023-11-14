@@ -6,13 +6,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class ArticleController
 {
-    private Article lastArticle;
+    private List<Article> articles = new ArrayList<>();
+    private int articlesLastIndex = -1;
+
     @GetMapping("/article/write")
     String showWrite()
     {
@@ -26,12 +30,12 @@ public class ArticleController
             String body
     )
     {
-        lastArticle = new Article(1,title, body);
+        Article article= new Article(articles.size() + 1,title, body);
         Map<String, Object> rs = new HashMap<>();
         rs.put("msg", "1번 게시물이 작성되었습니다.");
-        rs.put("data", lastArticle);
+        rs.put("data", article);
 
-
+        articles.add(article);
         return rs;
     }
 
@@ -39,7 +43,14 @@ public class ArticleController
     @ResponseBody
     Article getLastArticle()
     {
-        return lastArticle;
+        return articles.getLast();
+    }
+
+    @GetMapping("/article/getArticle")
+    @ResponseBody
+    List<Article> getArticle()
+    {
+        return articles;
     }
 }
 
