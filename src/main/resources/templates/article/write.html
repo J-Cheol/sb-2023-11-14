@@ -1,10 +1,16 @@
 <a onclick="return false;" href="https://www.naver.com">네이버</a>
 
+<form action="">
+    <input type="text" name="title">
+</form>
 
-<form onsubmit="submitWriteForm(); return false;" style="display: flex; flex-direction: column; gap:20px; max-width:500px;">
-    <input type="text" id="input-title" placeholder="제목">
+<form onsubmit="submitWriteForm(this); return false;" style="display: flex; flex-direction: column; gap:20px; max-width:500px;">
+<!--    <input type="text" name = "title" id="input-title" placeholder="제목">-->
 
-    <input type="text" id="input-body" placeholder="내용">
+<!--    <input type="text" name = "body" id="input-body" placeholder="내용">-->
+
+        <input type="text" name = "title" placeholder="제목">
+        <input type="text" name = "body" placeholder="내용">
 
     <!--javascript:; 는 아무것도 하지 않는다는 뜻 -->
     <button type="submit"> <!--전송 버튼-->
@@ -14,11 +20,14 @@
 </form>  <!--form은 div와 같다-->
 
 <script>
-    function submitWriteForm()
+    function submitWriteForm(form)
     {
         // alert('실행됨'); 알림울려줌
-        const inputTitle =  document.getElementById('input-title');
-        const inputBody = document.getElementById('input-body');
+        // const inputTitle =  document.getElementById('input-title');
+        // const inputBody = document.getElementById('input-body');
+        const inputTitle =  form.title;
+        const inputBody = form.body;
+
 
         inputTitle.value = inputTitle.value.trim();
         inputBody.value = inputBody.value.trim();
