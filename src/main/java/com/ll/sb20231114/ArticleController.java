@@ -1,5 +1,6 @@
 package com.ll.sb20231114;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
@@ -22,19 +23,15 @@ public class ArticleController
 
     @GetMapping("/article/doWrite")
     @ResponseBody
-    RsData doWrite(
-            String title,
-            String body
-    )
+    RsData<Article> doWrite(String title, String body)
     {
         Article article= new Article(articles.size() + 1,title, body);
+        articles.add(article);
 
         RsData<Article> rs = new RsData<Article>(
                 "S-1",
                 "%d번 게시물이 작성되었습니다.".formatted(article.getId()),
                 article);
-
-        articles.add(article);
 
         return rs;
     }
@@ -46,9 +43,9 @@ public class ArticleController
         return articles.getLast();
     }
 
-    @GetMapping("/article/getArticle")
+    @GetMapping("/article/getArticles")
     @ResponseBody
-    List<Article> getArticle()
+    List<Article> getArticles()
     {
         return articles;
     }
@@ -56,7 +53,8 @@ public class ArticleController
 
 @AllArgsConstructor
 @Getter
-class RsData<T>{
+class RsData<T>
+{
     private String resultCode;
     private String msg;
     private T data;
