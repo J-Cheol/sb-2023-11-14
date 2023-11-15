@@ -4,7 +4,8 @@
     <input type="text" name="title">
 </form>
 
-<form onsubmit="submitWriteForm(this); return false;" style="display: flex; flex-direction: column; gap:20px; max-width:500px;">
+<form action="/article/doWrite" onsubmit="submitWriteForm(this); return false;"
+      style="display: flex; flex-direction: column; gap:20px; max-width:500px;">
 <!--    <input type="text" name = "title" id="input-title" placeholder="제목">-->
 
 <!--    <input type="text" name = "body" id="input-body" placeholder="내용">-->
@@ -47,6 +48,8 @@
             inputBody.focus();
             return;
         }
-        location.href = `/article/doWrite?title=${title}&body=${body}`;
+
+        form.submit();
+        // location.href = `/article/doWrite?title=${title}&body=${body}`;
     }
 </script>
