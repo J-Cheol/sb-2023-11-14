@@ -4,7 +4,8 @@
     <input type="text" name="title">
 </form>
 
-<form action="/article/doWrite" onsubmit="submitWriteForm(this); return false;"
+<form method="POST" action="/article/doWrite" onsubmit="submitWriteForm(this); return false;"
+<!--      form은 method 설정 안하면 원래는 GET이다.-->
       style="display: flex; flex-direction: column; gap:20px; max-width:500px;">
 <!--    <input type="text" name = "title" id="input-title" placeholder="제목">-->
 
